@@ -10,7 +10,7 @@ fn get_input() -> io::Result<String> {
 }
 
 /// Read input from command line until newline
-fn rpn(input: String) -> Result<i32, ParseIntError> {
+fn rpn(input: &str) -> Result<i32, ParseIntError> {
     let mut stack = Vec::new();
 
     for c in input.split_whitespace() {
@@ -42,5 +42,5 @@ fn main() {
         args[1..].join(" ").to_string()
     };
 
-    println!("{}", rpn(input).unwrap());
+    println!("{}", rpn(&input).unwrap());
 }
