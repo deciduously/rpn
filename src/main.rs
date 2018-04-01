@@ -1,4 +1,4 @@
-use std::{io, num::ParseIntError};
+use std::{env::args, io, num::ParseIntError};
 
 mod test;
 
@@ -33,9 +33,14 @@ fn rpn(input: String) -> Result<i32, ParseIntError> {
 }
 
 fn main() {
-    // TODO Take cmd line args as input
-    println!("Enter input: ");
-    let input = get_input().expect("Bad input, doofus");
-    let result = rpn(input);
-    println!("{:?}", result.unwrap());
+    let args: Vec<String> = args().collect();
+
+    let input = if args.len() == 1 {
+        println!("Enter input: ");
+        get_input().expect("Bad input")
+    } else {
+        args[1..].join(" ").to_string()
+    };
+
+    println!("{}", rpn(input).unwrap());
 }
